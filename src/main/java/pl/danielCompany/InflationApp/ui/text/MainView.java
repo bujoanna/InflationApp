@@ -2,13 +2,14 @@ package pl.danielCompany.InflationApp.ui.text;
 
 import pl.danielCompany.InflationApp.domain.InflationRate.InflationRateService;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MainView {
 
     private InflationRateService inflationRateService = new InflationRateService();
 
-    public void init() {
+    public void init() throws IOException {
         System.out.println(" Inflations Application ");
         System.out.println(" Wybierz działanie: ");
         Scanner input = new Scanner(System.in);
@@ -21,12 +22,11 @@ public class MainView {
             if (option == 1) {
                 this.createAloneNewAverageAnnualInflation(input);
             } else if (option == 0) {
+                System.out.println("Zapisuje dane");
+                this.inflationRateService.saveAll();
                 System.out.println("Zamykam program.");
             }
-
-
         }
-
     }
 
     private void createAloneNewAverageAnnualInflation(Scanner input) {
